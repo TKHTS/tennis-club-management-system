@@ -11,6 +11,12 @@
                 case "add_level_to_member":
                     include('./pages/add_level_to_member.php');
                     break;
+                case "edit_level_of_member":
+                    include('./pages/edit_level_of_member.php');
+                    break;
+                case "freeboard":
+                    include('./pages/freeboard.php');
+                    break;
             }
         }else{
             include ('./pages/home.php');

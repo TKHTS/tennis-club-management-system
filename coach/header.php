@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="../css/style.css" rel="stylesheet">
     <title>TCMS</title>
 </head>
@@ -19,12 +20,14 @@
         <div class="row">
             <div class="col-3 bg-primary min-vh-100 position-sticky d-flex justify-content-center py-5">
                 <nav>
-                    <h3 class="text-center text-white py-5">TCMS</h3>
+                    <h3 class="text-center text-white py-4">TCMS</h3>
                     <h4 class="text-white py-5">Karla clouse</h4>
                     <ul class="list-unstyled">
-                        <li><i class="bi bi-house-door text-white"></i><a class="ml-4 text-white text-decoration-none" href="index.php?p=home">Home</a></li>
-                        <li><a class="text-white text-decoration-none" href="index.php?p=add_level_to_member">Add level to member</a></li>
-                        <li><a class="text-white text-decoration-none" href="../login.php">Log out</a></li>
+                        <li class="my-2"><i class="bi bi-house-door text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=home">Dashboard</a></li>
+                        <li class="my-2"><i class="bi bi-bar-chart-steps text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=add_level_to_member">Add level to member</a></li>
+                        <li class="my-2"><i class="bi bi-pen text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=edit_level_of_member">Edit level of member</a></li>
+                        <li class="my-2"><i class="bi bi-clipboard text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=freeboard">Freeboard</a></li>
+                        <li class="my-2"><a class="text-white text-decoration-none" href="../login.php">Log out</a></li>
                     </ul>
                 </nav>
             </div>

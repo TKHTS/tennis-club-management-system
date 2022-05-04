@@ -11,6 +11,15 @@
                 case "add_new_user":
                     include('./pages/add_new_user.php');
                     break;
+                case "add_new_course":
+                    include('./pages/add_new_course.php');
+                    break;
+                case "freeboard":
+                    include('./pages/freeboard.php');
+                    break;
+                case "manage_notification":
+                    include('./pages/manage_notification.php');
+                    break;
             }
         }else{
             include ('./pages/home.php');
