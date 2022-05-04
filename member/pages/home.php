@@ -1,2 +1,1 @@
-
-<h1>member Home page</h1>
+<h1>Dashboard | Member</h1>
