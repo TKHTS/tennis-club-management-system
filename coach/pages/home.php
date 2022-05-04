@@ -1,2 +1,1 @@
-
-<h1>Coach Home page</h1>
+<h1>Dashboard | Coach</h1>
