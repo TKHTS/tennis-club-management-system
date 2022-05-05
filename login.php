@@ -31,7 +31,7 @@
             <div class="col-4 d-flex align-items-center justify-content-center">
                 <div class="p-5">
                     <h3 class="text-primary text-bold py-2">Tennis club management system</h3>
-                    <h5 class="text-primary py-2">Welcome Let's get started</h5>
+                    <h5 class="text-primary py-2">Welcome,<br> Let's get started</h5>
                     <p class="text-muted py-2">Please use your credentials to login. If you are not a member, please register. </p>
                     <form>
                         <div class="mb-3">
