@@ -14,6 +14,9 @@
                 case "freeboard":
                     include('./pages/freeboard.php');
                     break;
+                case "course_list":
+                    include('./pages/course_list.php');
+                    break;
             }
         }else{
             include ('./pages/home.php');

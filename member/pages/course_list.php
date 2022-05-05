@@ -1,0 +1,1 @@
+<h1>Course list</h1>
