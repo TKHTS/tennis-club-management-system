@@ -1,6 +1,14 @@
 <?php
 session_start();
 include("./config/config.php");
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    if (isset($_GET['error'])) {
+        if ($_GET['error'] == 'logout') {
+            session_unset();
+            session_destroy();
+        }
+    }
+}
 $message = "";
 if (isset($_COOKIE['useremail'])) {
     $loginuseremail = $_COOKIE['useremail'];
@@ -104,21 +112,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
-                    <p class="mt-4">The section below is for testing ↓</p>
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data">
-                        <select name="usertype">
-                            <option value="admin">admin</option>
-                            <option value="coach">coach</option>
-                            <option value="member">member</option>
-                        </select>
-                        <input type="submit" name="login" value="Login">
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

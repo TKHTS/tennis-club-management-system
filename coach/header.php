@@ -27,7 +27,7 @@
                         <li class="my-2"><i class="bi bi-bar-chart-steps text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=add_level_to_member">Add level to member</a></li>
                         <li class="my-2"><i class="bi bi-pen text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=edit_level_of_member">Edit level of member</a></li>
                         <li class="my-2"><i class="bi bi-clipboard text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=freeboard">Freeboard</a></li>
-                        <li class="my-2"><a class="text-white text-decoration-none" href="../login.php">Log out</a></li>
+                        <li class="my-2"><a class="text-white text-decoration-none" href="../login.php?error=logout">Log out</a></li>
                     </ul>
                 </nav>
             </div>

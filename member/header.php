@@ -27,7 +27,7 @@
                         <li class="my-2"><i class="bi bi-list-ul text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=course_list">Course list</a></li>
                         <li class="my-2"><i class="bi bi-signpost-split text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=add_my_course">Add my course</a></li>
                         <li class="my-2"><i class="bi bi-clipboard text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=freeboard">Freeboard</a></li>
-                        <li><a class="text-white text-decoration-none" href="../login.php?error=loggedout">Log out</a></li>
+                        <li><a class="text-white text-decoration-none" href="../login.php?error=logout">Log out</a></li>
                     </ul>
                 </nav>
             </div>
