@@ -1,3 +1,61 @@
+<?php
+session_start();
+include("./config/config.php");
+$message = "";
+if (isset($_COOKIE['useremail'])) {
+    $loginuseremail = $_COOKIE['useremail'];
+} else {
+    $loginuseremail = "";
+}
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $dbInfo = new mysqli($DBServer, $username, $password, $dbName);
+    if ($dbInfo->connect_error) {
+        die("Connection error:" . $dbInfo->connect_error);
+    }
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+    $selectQuery = "SELECT * FROM users WHERE 
+            email='$email'";
+    $result = $dbInfo->query($selectQuery);
+    if ($result->num_rows > 0) {
+        $cookieValue = "";
+        while ($row = $result->fetch_assoc()) {
+            //echo "id".$row['customer_id']." Name:".$row['customerName']." Email:".$row['email']." address:".$row['customerAddress'];
+            $salt = $row['salt'];
+            $password = $row['password'];
+            $user_type = $row['user_type'];
+            if (password_verify($pass . $salt, $password)) {
+                $cookieValue = $row['email'];
+                $_SESSION['user_name'] = $row['user_name'];
+                if (isset($_POST['rememberme'])) {
+                    if ($_POST['rememberme'] == "on") {
+                        $cookieName = "useremail";
+                        $cookieExp = time() + (86400 + 3);
+                        setcookie($cookieName, $cookieValue, $cookieExp, "/");
+                    }
+                }
+                if (!empty($_POST)) {
+                    if ($user_type == "admin") {
+                        header("location: ./admin/index.php");
+                    } elseif ($user_type == "coach") {
+                        header("location: ./coach/index.php");
+                    } elseif ($user_type == "member") {
+                        header("location: ./member/index.php");
+                    } else {
+                        echo "Invalid user";
+                    }
+                }
+                exit;
+            } else {
+                $message = "Wrong email or password";
+            }
+        }
+    } else {
+        $message =  "Wrong email or password";
+    }
+    $dbInfo->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,33 +75,37 @@
 <body class="bg-gray">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8 p-0">
+            <div class="col-9 p-0">
                 <div class="card">
                     <img class="card-img" src="./img/common/tennis_club_cover.jpg" alt="cover">
                     <div class="card-img-overlay d-flex align-items-center">
                         <div>
                             <h2 class="text-white">Welcome to our club</h2>
-                            <p  class="text-white pt-3">Tennis is a sport you can do for a lifetime. <br> The earlier you start the better.</p>
+                            <p class="text-white pt-3">Tennis is a sport you can do for a lifetime. <br> The earlier you start the better.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-4 d-flex align-items-center justify-content-center">
+            <div class="col-3 d-flex align-items-center justify-content-center">
                 <div class="p-5">
                     <h3 class="text-primary text-bold py-2">Tennis club management system</h3>
                     <h5 class="text-primary py-2">Welcome,<br> Let's get started</h5>
                     <p class="text-muted py-2">Please use your credentials to login. If you are not a member, please register. </p>
-                    <form>
+                    <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
                         <div class="mb-3">
-                            <input type="email" class="form-control border-0 bg-light" id="InputEmail1" placeholder="Email">
+                            <input type="email" class="form-control border-0 bg-light" name="email" id="InputEmail1" placeholder="Email" value="<?php echo $loginuseremail; ?>">
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control bg-light border-0" id="InputPassword1" placeholder="Password">
+                            <input type="password" name="password" class="form-control bg-light border-0" id="InputPassword1" placeholder="Password">
+                        </div>
+                        <div class="text-danger"><?= $message ?></div>
+                        <div class="mb-3">
+                            <input type="checkbox" name="remember_me" id="rememberme"><span class="px-2">Remember me</span>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                     <p class="mt-4">The section below is for testing ↓</p>
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data">
                         <select name="usertype">
                             <option value="admin">admin</option>
                             <option value="coach">coach</option>
@@ -55,21 +117,7 @@
             </div>
         </div>
     </div>
-    <?php
 
-    //Redirect to index page according to usertype
-    if (!empty($_POST)) {
-        if (($_POST["usertype"]) == "admin") {
-            header("location: ./admin/index.php");
-        } elseif ($_POST["usertype"] == "coach") {
-            header("location: ./coach/index.php");
-        } elseif ($_POST["usertype"] == "member") {
-            header("location: ./member/index.php");
-        } else {
-            echo "Invalid user";
-        }
-    }
-    ?>
 
 </body>
 
