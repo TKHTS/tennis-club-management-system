@@ -32,4 +32,4 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-9 p-4">
+            <div class="col-9 p-4 bg-light">
