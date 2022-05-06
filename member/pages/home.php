@@ -1,1 +1,1 @@
-<h1>Dashboard | Member</h1>
+<h1>Dashboard</h1>
