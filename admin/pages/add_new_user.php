@@ -1,1 +1,38 @@
 <h1>Add new user</h1>
+<div class="bg-white p-4 my-4">
+    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>?p=add_new_user">
+        <input class="form-control" type="text" name="username" placeholder="Name"><br>
+        <input class="form-control" type="email" name="email" placeholder="Email"><br>
+        <input class="form-control" type="tel" name="phone" placeholder="Phone"><br>
+        <input class="form-control" type="password" name="pass" placeholder="password"><br>
+        <select class="form-select" name="user_type">
+            <option value="admin">Admin</option>
+            <option value="coach">Coach</option>
+            <option value="member">Member</option>
+        </select>
+        <button class="my-4 btn btn-primary w-25" type="submit">Register</button>
+    </form>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $dbInfo = new mysqli($DBServer, $username, $password, $dbName);
+        if ($dbInfo->connect_error) {
+            die("Connection has problem:" . $dbInfo->connect_error);
+        }
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
+        $phone = $_POST['phone'];
+        $user_type = $_POST['user_type'];
+        $salt = time();
+        $password = password_hash($pass . $salt, PASSWORD_DEFAULT);
+        $insertQuery = "INSERT INTO users 
+        (user_name,email,phone,password,salt,user_type) VALUES('$username', '$email','$phone', '$password', '$salt', '$user_type')";
+        if ($dbInfo->query($insertQuery) === true) {
+            echo "<h2 class='text-success'>Registration successful</h2>";
+        } else {
+            echo "Error:" . $dbInfo->error;
+        }
+        $dbInfo->close();
+    }
+    ?>
+</div>
