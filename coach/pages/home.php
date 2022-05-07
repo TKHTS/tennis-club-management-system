@@ -1,9 +1,4 @@
-<?php session_start();
-// if (!isset($_SESSION['customerName'])) {
-//     session_destroy();
-//     header('Location: customerLogin.php');
-//     exit;
-// }
+<?php
 ?>
 
 <h1>Dashboard | Coach</h1>

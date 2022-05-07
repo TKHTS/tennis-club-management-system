@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION['user_name'])) {
+    session_destroy();
+    header('Location: /tcms/login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +28,8 @@
             <div class="col-3 bg-primary min-vh-100 position-sticky d-flex justify-content-center py-5">
                 <nav>
                     <h3 class="text-center text-white py-4">TCMS</h3>
-                    <h4 class="text-white py-5">Karla clouse</h4>
+                    <h4 class="text-white pt-5"><?php echo $_SESSION['user_name']; ?></h4>
+                    <h5 class="text-white pb-4">ID: <?php echo $_SESSION['user_id']." / ".$_SESSION['user_type']; ?></h5>
                     <ul class="list-unstyled">
                         <li class="my-2"><i class="bi bi-house-door text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=home">Dashboard</a></li>
                         <li class="my-2"><i class="bi bi-bar-chart-steps text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=add_level_to_member">Add level to member</a></li>

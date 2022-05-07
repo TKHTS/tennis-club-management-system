@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_name'])) {
                 <nav>
                     <h3 class="text-center text-white py-4">TCMS</h3>
                     <h4 class="text-white pt-5"><?php echo $_SESSION['user_name']; ?></h4>
-                    <h5 class="text-white pb-4">ID: <?php echo $_SESSION['user_id']."<br>".$_SESSION['user_type']; ?></h5>
+                    <h5 class="text-white pb-4">ID: <?php echo $_SESSION['user_id']." / ".$_SESSION['user_type']; ?></h5>
                     <ul class="list-unstyled">
                         <li class="my-2"><i class="bi bi-house-door text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=home">Home</a></li>
                         <li class="my-2"><i class="bi bi-person text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=add_new_user">Add new user</a></li>
