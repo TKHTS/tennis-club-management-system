@@ -1,11 +1,11 @@
 <h1>Add new user</h1>
 <div class="bg-white p-4 my-4">
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>?p=add_new_user">
-        <input class="form-control" type="text" name="username" placeholder="Name"><br>
-        <input class="form-control" type="email" name="email" placeholder="Email"><br>
-        <input class="form-control" type="tel" name="phone" placeholder="Phone"><br>
-        <input class="form-control" type="password" name="pass" placeholder="password"><br>
-        <select class="form-select" name="user_type">
+        <input class="form-control" type="text" name="username" placeholder="Name" required><br>
+        <input class="form-control" type="email" name="email" placeholder="Email" required><br>
+        <input class="form-control" type="tel" name="phone" placeholder="Phone" required><br>
+        <input class="form-control" type="password" name="pass" placeholder="password" required><br>
+        <select class="form-select" name="user_type" required>
             <option value="admin">Admin</option>
             <option value="coach">Coach</option>
             <option value="member">Member</option>
@@ -25,6 +25,16 @@
         $user_type = $_POST['user_type'];
         $salt = time();
         $password = password_hash($pass . $salt, PASSWORD_DEFAULT);
+
+        //Check whehter the user account already exists or not
+        $selectQuery = "SELECT * FROM users WHERE email = '$email'";
+        $users_email = $dbInfo->query($selectQuery);
+        if ($users_email->num_rows > 0) {
+            echo "<h2 class='text-danger'>The user account already exists</h2>";
+            return;
+        }
+
+        //Insert information
         $insertQuery = "INSERT INTO users 
         (user_name,email,phone,password,salt,user_type) VALUES('$username', '$email','$phone', '$password', '$salt', '$user_type')";
         if ($dbInfo->query($insertQuery) === true) {
