@@ -8,6 +8,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             session_destroy();
         }
     }
+    // User who logged in can't see login page
+    if (isset($_SESSION['user_name'])) {
+        //Access only authorized pages 
+        if ($_SESSION['user_type'] != $parent_dir) {
+            $location = "/tcms/" . $_SESSION["user_type"] . "/index.php?p=not_found";
+            header("Location: $location");
+        }
+    }
 }
 $message = "";
 if (isset($_COOKIE['useremail'])) {
