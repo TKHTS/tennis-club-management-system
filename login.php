@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (password_verify($pass . $salt, $password)) {
                 $cookieValue = $row['email'];
                 $_SESSION['user_name'] = $row['user_name'];
+                $_SESSION['user_type'] = $row['user_type'];
+                $_SESSION['user_id'] = $row['user_id'];
                 if (isset($_POST['rememberme'])) {
                     if ($_POST['rememberme'] == "on") {
                         $cookieName = "useremail";
@@ -108,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         </div>
                         <div class="text-danger"><?= $message ?></div>
                         <div class="mb-3">
-                            <input type="checkbox" name="remember_me" id="rememberme"><span class="px-2">Remember me</span>
+                            <input type="checkbox" name="rememberme" id="rememberme"><span class="px-2">Remember me</span>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
