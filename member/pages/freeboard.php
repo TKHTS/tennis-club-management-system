@@ -1,1 +1,1 @@
-<h1>freeboard</h1>
+<h1>Freeboard</h1>
