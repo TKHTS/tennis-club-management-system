@@ -1,7 +1,61 @@
+<h1>Coach Dashboard</h1>
 <?php
-?>
+$dbInfo = new mysqli($DBServer, $username, $password, $dbName);
+if ($dbInfo->connect_error) {
+    die("DB error: " . $dbInfo->connect_error);
+} else {
 
-<h1>Dashboard | Coach</h1>
-<?php
-echo "welcome " . $_SESSION['user_name'];
-?>
+    //Delete member from the course
+    if (isset($_GET['delete_registration_course_member_id'])) {
+        $deleteQuery = "DELETE FROM registered_courses WHERE course_registration_id = " . $_GET['delete_registration_course_member_id'];
+        if ($dbInfo->query($deleteQuery) === true) {
+            echo "<h2 class='text-success my-5'>Course successfully deleted</h2>";
+        } else {
+            echo $dbInfo->error;
+        }
+    }
+
+    $user_id = $_SESSION['user_id'];
+
+    $selectQuery = "SELECT * FROM registered_courses JOIN users ON registered_courses.member_id = users.user_id JOIN courses ON registered_courses.course_id = courses.course_id WHERE coach_id = $user_id ORDER BY courses.course_id ASC";
+    $courses_list = $dbInfo->query($selectQuery);
+    if ($courses_list->num_rows > 0) {
+        echo "<h2 class='pt-4'>My members</h2>";
+        echo "<table class='w-100'><tr><th class='p-3'>ID</th><th>Name</th><th>Level</th></tr>";
+        while ($course = $courses_list->fetch_assoc()) {
+            echo "<tr class='bg-white border-5 border-light rounded-3'><td class='p-3'>" . $course['user_id'] . "</td><td class='p-1'>" . $course['user_name'] . "</td><td class='p-1'>" . $course['level'] . "</td><td class='p-3'><a class='text-danger'". " onclick=\"return confirm('Are you sure?')\"". "href='" . $_SERVER['PHP_SELF'] . "?p=home&delete_registration_course_member_id=" . $course['course_registration_id'] . "'>Delete</a></td></td></tr>";
+        }
+        echo "</table>";
+    }
+
+    // Read my courses
+    $selectQuery = "SELECT * FROM registered_courses JOIN users ON registered_courses.member_id = users.user_id JOIN courses ON registered_courses.course_id = courses.course_id WHERE coach_id = $user_id ORDER BY courses.course_id ASC";
+    $courses_list = $dbInfo->query($selectQuery);
+    if ($courses_list->num_rows > 0) {
+        echo "<h2 class='pt-4'>My courses</h2>";
+        echo "<table class='w-100'><tr><th class='p-3'>ID</th><th>Name</th><th>Schedule</th><th>Fee</th></tr>";
+        while ($course = $courses_list->fetch_assoc()) {
+            echo "<tr class='bg-white border-5 border-light rounded-3'><td class='p-3'>" . $course['course_id'] . "</td><td class='p-1'>" . $course['course_name'] . "</td><td class='p-1'>" . $course['course_day_time'] . "</td><td class='p-1'> $ " . $course['course_fee'] .
+                "</td>" . "</tr>";
+        }
+        echo "</table>";
+    }
+
+    // Read notification
+    $selectQuery = "SELECT * FROM notifications ORDER BY notification_id DESC LIMIT 5";
+    $notifications_list = $dbInfo->query($selectQuery);
+    if ($notifications_list->num_rows > 0) {
+        echo "<h2 class='pt-4'>Notificaton</h2>";
+        echo "<div class='w-100 bg-white p-2'>";
+        while ($notification = $notifications_list->fetch_assoc()) {
+            $edited_time = date('Y/m/d H:i',  strtotime($notification['created_at']));
+            echo  "<div class='m-2 p-3 border-bottom'><p class='text-primary'>" . $edited_time . "</p><td class='p-1'>" . $notification['notification_text'] .
+                "</div>";
+        }
+        echo "</div>";
+    }
+
+
+
+    $dbInfo->close();
+}
