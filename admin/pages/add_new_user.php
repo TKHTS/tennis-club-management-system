@@ -3,7 +3,7 @@
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>?p=add_new_user">
         <input class="form-control" type="text" name="username" placeholder="Name" required><br>
         <input class="form-control" type="email" name="email" placeholder="Email" required><br>
-        <input class="form-control" type="tel" name="phone" placeholder="Phone" required><br>
+        <input class="form-control" type="tel" name="phone" placeholder="Phone" maxlength="11" required><br>
         <input class="form-control" type="password" name="pass" placeholder="password" required><br>
         <select class="form-select" name="user_type" required>
             <option value="admin">Admin</option>
@@ -18,11 +18,11 @@
         if ($dbInfo->connect_error) {
             die("Connection has problem:" . $dbInfo->connect_error);
         }
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
-        $phone = $_POST['phone'];
-        $user_type = $_POST['user_type'];
+        $username = sanitize_input($_POST['username']);
+        $email = sanitize_input($_POST['email']);
+        $pass = sanitize_input($_POST['pass']);
+        $phone = sanitize_input($_POST['phone']);
+        $user_type = sanitize_input($_POST['user_type']);
         $salt = time();
         $password = password_hash($pass . $salt, PASSWORD_DEFAULT);
 

@@ -29,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($dbInfo->connect_error) {
         die("Connection has problem:" . $dbInfo->connect_error);
     }
-    $course_name = $_POST['course_name'];
-    $course_fee = $_POST['course_fee'];
-    $course_coach = $_POST['course_coach'];
-    $course_day_time = $_POST['course_day_time'];
-    $course_explanation = $_POST['course_explanation'];
+    $course_name = sanitize_input($_POST['course_name']);
+    $course_fee = sanitize_input($_POST['course_fee']);
+    $course_coach = sanitize_input($_POST['course_coach']);
+    $course_day_time = sanitize_input($_POST['course_day_time']);
+    $course_explanation = sanitize_input($_POST['course_explanation']);
 
     //Check whehter the course already exists or not
     $selectQuery = "SELECT * FROM courses WHERE course_name = '$course_name'";
