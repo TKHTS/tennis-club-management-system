@@ -47,8 +47,6 @@
     $postId = $_GET['dnId'];
         $deleteQuery = "DELETE FROM notifications WHERE notification_id = '$postId'";
     if ($dbInfo->query($deleteQuery) === true) {
-      // redirection code
-      // echo "<span class='text-primary' >Deleted</span>";
     } else {
         echo "Error:" . $dbInfo->error;
     }
@@ -84,7 +82,7 @@
           <textarea class='form-control' name='content' cols='80' rows='10' required>".$getContent."</textarea>
           <br>
           <br>
-          <input type='submit' value='Save'>
+          <button type='submit' class='btn btn-primary' value='Save'>Save</button>
       </form>";
 
   }

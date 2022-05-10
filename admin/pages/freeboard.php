@@ -7,7 +7,7 @@ if ($dbInfo->connect_error) {
 } else {
 
   // Write Process
-  if (isset($_GET['write'])) {
+  if (isset($_POST['content'])) {
     $userName = $_SESSION['user_name'];
     $postText = $_POST['content'];
     $insertQuery = "INSERT INTO freeboard_posts(writer,post_text) VALUES('$userName', '$postText')";
@@ -16,7 +16,6 @@ if ($dbInfo->connect_error) {
     } else {
         echo "Error:" . $dbInfo->error;
     }
-    
   }
 
   // List
@@ -24,19 +23,16 @@ if ($dbInfo->connect_error) {
   $postList = $dbInfo->query($selectQuery);
   if ($postList->num_rows > 0) {
 
-      echo "<table class='w-100'>";
+      echo "<div class='w-100'>";
 
       while ($post = $postList->fetch_assoc()) {
 
-        echo "<tr class='bg-white border-5 border-light rounded-3'>
-        <td class='p-1'>". $post['writer'] ."</td>
-        <td class='p-1'>". $post['created_at'] . "</td>
-        </tr >
-              <tr>
-              <td class='p-1' colspan='2'>" . $post['post_text'] . "</td>
-              </tr>";
+        echo "<div class='bg-white border-5 border-light rounded-3 m-2 p-3'>
+        <span class='p-3 text-primary'>". $post['writer'] ."</span>
+        <span class='p-3 mr-auto'>". $post['created_at'] . "</span>
+        <div class='p-3'>". $post['post_text']."</div>"."</div>";
       }
-      echo "</table>";     
+      echo "</div>";     
       
 
     } else {
@@ -44,13 +40,13 @@ if ($dbInfo->connect_error) {
   }
 
   // write form 
-  $path = $_SERVER['PHP_SELF']."?p=freeboard&write=true";
+  $path = $_SERVER['PHP_SELF']."?p=freeboard";
 
   echo "<form name='writeForm' method='POST' action='".$path."'>
           <textarea class='form-control' name='content' cols='80' rows='10' required></textarea>
           <br>
           <br>
-          <input type='submit' value='Save'>
+          <button type='submit' class='btn btn-primary' value='Save'>Save</button>
       </form>";
 
 }
