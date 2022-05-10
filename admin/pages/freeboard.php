@@ -6,7 +6,6 @@ if ($dbInfo->connect_error) {
   die("DB error: " . $dbInfo->connect_error);
 } else {
 
-  // $_SESSION['user_name']
   // Write Process
   if (isset($_GET['write'])) {
     $userName = $_SESSION['user_name'];
@@ -19,7 +18,6 @@ if ($dbInfo->connect_error) {
     }
     
   }
-
 
   // List
   $selectQuery = "SELECT * FROM freeboard_posts ORDER BY post_id DESC";
@@ -45,6 +43,7 @@ if ($dbInfo->connect_error) {
     echo "No contents";
   }
 
+  // write form 
   $path = $_SERVER['PHP_SELF']."?p=freeboard&write=true";
 
   echo "<form name='writeForm' method='POST' action='".$path."'>
