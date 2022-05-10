@@ -56,7 +56,7 @@ if (!isset($_SESSION['user_name'])) {
                     <ul class="list-unstyled" <?php if ($parent_dir != "coach") {
                                                     echo "style='display:none;'";
                                                 }; ?>>
-                        <li class="my-2"><i class="bi bi-house-door text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=home">Dashboard</a></li>
+                        <li class="my-2"><i class="bi bi-house-door text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=home">Home</a></li>
                         <li class="my-2"><i class="bi bi-clipboard text-white"></i><a class="px-4 text-white text-decoration-none" href="index.php?p=freeboard">Freeboard</a></li>
                         <li class="my-2"><a class="text-white text-decoration-none" href="../login.php?error=logout">Log out</a></li>
                     </ul>
