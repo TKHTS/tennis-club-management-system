@@ -2,6 +2,7 @@
 $parent_dir = basename(dirname(__FILE__));
 include("../config/config.php");
 include('../header.php');
+include("../functions.php");
 ?>
 <main>
     <?php
