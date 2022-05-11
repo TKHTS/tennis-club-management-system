@@ -12,10 +12,16 @@
 
   // Write Process
   if (isset($_GET['w'])) {
-    $postText = $_POST['content'];
+        //Sanitize text data and add break
+        $postText = nl2br(htmlspecialchars($_POST['content']));
         $insertQuery = "INSERT INTO notifications(notification_text) VALUES('$postText')";
     if ($dbInfo->query($insertQuery) === true) {
-      // redirection code
+        // Avoid duplicate post
+        echo <<<EOF
+        <script>
+            location.href='./index.php?p=manage_notification';
+        </script>
+        EOF;
     } else {
         echo "Error:" . $dbInfo->error;
     }
@@ -32,11 +38,17 @@
 
   // Update Process
   if (isset($_GET['enId']) && isset($_GET['u'])) {
-    $postText = $_POST['content'];
+    //Sanitize text data and add break
+    $postText = nl2br(htmlspecialchars($_POST['content']));
     $postId = $_GET['enId'];
     $updateQuery = "UPDATE notifications SET notification_text='$postText' WHERE notification_id = '$postId'";
     if ($dbInfo->query($updateQuery) === true) {
-      // redirection code
+        // Avoid duplicate post
+        echo <<<EOF
+        <script>
+            location.href='./index.php?p=manage_notification';
+        </script>
+        EOF;
     } else {
         echo "Error:" . $dbInfo->error;
     }
