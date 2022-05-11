@@ -9,10 +9,16 @@ if ($dbInfo->connect_error) {
   // Write Process
   if (isset($_POST['content'])) {
     $userName = $_SESSION['user_name'];
-    $postText = $_POST['content'];
+    //Sanitize text data and add break
+    $postText = nl2br(htmlspecialchars($_POST['content']));
     $insertQuery = "INSERT INTO freeboard_posts(writer,post_text) VALUES('$userName', '$postText')";
     if ($dbInfo->query($insertQuery) === true) {
-      // redirection code
+        // Avoid duplicate post
+        echo <<<EOF
+        <script>
+          location.href='./index.php?p=freeboard';
+        </script>
+        EOF;
     } else {
         echo "Error:" . $dbInfo->error;
     }
