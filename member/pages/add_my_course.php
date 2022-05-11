@@ -16,7 +16,7 @@ if ($coursees_list->num_rows > 0) {
         echo "<option value='" . $course['course_id'] . "'>" . $course['course_name'] . "</option>";
     }
     echo "</select>";
-    echo "<button class='btn btn-primary w-25' type='submit' value='submit'>Register</button>";
+    echo "<button class='btn btn-primary w-25 my-4' type='submit' value='submit'>Register</button>";
     echo "</form>";
 }
 
@@ -34,6 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         while ($course = $users_email->fetch_assoc()) {
             $coach_id = $course['course_coach'];
         }
+    }
+
+    // Check whehter the course was already registerd by the user or not
+    $selectQuery = "SELECT * FROM registered_courses WHERE course_id = '$course_id' AND member_id = '$member_id'";
+    $users_email = $dbInfo->query($selectQuery);
+    if ($users_email->num_rows > 0) {
+        echo "<h2 class='text-danger'>The course was already registered </h2>";
+        return;
     }
 
     $insertQuery = "INSERT INTO registered_courses 
