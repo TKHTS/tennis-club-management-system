@@ -13,6 +13,7 @@ if ($dbInfo->connect_error) {
     $insertQuery = "INSERT INTO freeboard_posts(writer,post_text) VALUES('$userName', '$postText')";
     if ($dbInfo->query($insertQuery) === true) {
       // redirection code
+      header('Location: ./');
     } else {
         echo "Error:" . $dbInfo->error;
     }
