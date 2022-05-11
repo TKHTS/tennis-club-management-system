@@ -3,7 +3,7 @@
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>?p=add_new_user">
         <input class="form-control" type="text" name="username" placeholder="Name" required><br>
         <input class="form-control" type="email" name="email" placeholder="Email" required><br>
-        <input class="form-control" type="tel" name="phone" placeholder="Phone" maxlength="11" required><br>
+        <input class="form-control" type="tel" name="phone" placeholder="Phone" maxlength="13" required><br>
         <input class="form-control" type="password" name="pass" placeholder="password" required><br>
         <select class="form-select" name="user_type" required>
             <option value="admin">Admin</option>
