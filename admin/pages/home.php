@@ -111,7 +111,6 @@ if ($dbInfo->connect_error) {
             echo "<button class='btn btn-primary w-25' type='submit' value='submit'>Edit</button>";
             echo "</form>";
 
-            $dbInfo->close();
         }
     }
 
