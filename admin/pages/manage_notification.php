@@ -34,12 +34,18 @@
     $getContentData = $dbInfo->query($selectQuery);
     $getContent = $getContentData->fetch_assoc();
     $getContent = $getContent['notification_text'] === null ? '' : $getContent['notification_text'];
+    //Delete unnecessary linefeed code
+    $getContent = str_replace(array("\r\n", "\r", "\n", ""), "", $getContent);
+    //Display html tag as html inside textarea
+    $getContent = str_replace("<br />", "&#13", $getContent);
   }
 
   // Update Process
   if (isset($_GET['enId']) && isset($_GET['u'])) {
     //Sanitize text data and add break
-    $postText = nl2br(htmlspecialchars($_POST['content']));
+    $postText = nl2br($_POST['content']);
+    //Delete unnecessary linefeed code
+    $postText = str_replace(array("\r\n", "\r", "\n"), "", $postText);
     $postId = $_GET['enId'];
     $updateQuery = "UPDATE notifications SET notification_text='$postText' WHERE notification_id = '$postId'";
     if ($dbInfo->query($updateQuery) === true) {
