@@ -5,9 +5,9 @@
         die("DB error: " . $dbInfo->connect_error);
     } else {
 
-        //Delete user
+        //Delete course from member
         if(isset($_GET['delete_course_id'])){
-            $deleteQuery = "DELETE FROM users WHERE user_id = ".$_GET['delete_course_id'];
+            $deleteQuery = "DELETE FROM registered_courses WHERE course_registration_id = ".$_GET['delete_course_id'];
             if($dbInfo->query($deleteQuery) === true){
                 echo "<h2 class='text-success my-5'>Course successfully deleted</h2>";
             }else{
