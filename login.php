@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div class="container-fluid">
         <div class="row">
             <div class="col-9 p-0">
-                <div class="card">
+                <div class="card border-0">
                     <img class="card-img" src="./img/common/tennis_club_cover.jpg" alt="cover">
                     <div class="card-img-overlay d-flex align-items-center">
                         <div>
@@ -104,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </div>
                 </div>
             </div>
-            <div class="col-3 d-flex align-items-center justify-content-center">
-                <div class="p-5">
+            <div class="col-3 d-flex justify-content-center">
+                <div class="py-4 px-5">
                     <h3 class="text-primary text-bold py-2">Tennis club management system</h3>
                     <h5 class="text-primary py-2">Welcome,<br> Let's get started</h5>
                     <p class="text-muted py-2">Please use your credentials to login. If you are not a member, please register. </p>
