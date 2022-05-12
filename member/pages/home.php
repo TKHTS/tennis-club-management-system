@@ -21,10 +21,10 @@
         $courses_list = $dbInfo->query($selectQuery);
         if ($courses_list->num_rows > 0) {
             echo "<h2 class='pt-4'>Courses</h2>";
-            echo "<table class='w-100'><tr><th class='p-3'>ID</th><th>Name</th><th>Coach</th><th>Schedule</th><th>Course fee</th></tr>";
+            echo "<table class='w-100'><tr><th class='p-3'>ID</th><th>Name</th><th>Coach</th><th>Schedule</th><th>Course fee</th><th>Level</th></tr>";
             while ($course = $courses_list->fetch_assoc()) {
                 echo "<tr class='bg-white border-5 border-light rounded-3'><td class='p-3'>" . $course['course_id'] . "</td><td class='p-1'>" . $course['course_name'] . "</td><td td class='p-1'>" . $course['user_name'] ."</td><td class='p-1'>" .$course['course_day_time'] ."</td><td class='p-1'> $ " .$course['course_fee'].
-                    "</td>" . "<td class='p-3'><a class='text-danger'". " onclick=\"return confirm('Are you sure?')\"". "href='" . $_SERVER['PHP_SELF'] . "?p=home&delete_course_id=" . $course['course_registration_id'] . "'>Delete</a></td></td></tr>";
+                    "</td><td class='p-1'>" .$course['level']."</td>" . "<td class='p-3'><a class='text-danger'". " onclick=\"return confirm('Are you sure?')\"". "href='" . $_SERVER['PHP_SELF'] . "?p=home&delete_course_id=" . $course['course_registration_id'] . "'>Delete</a></td></td></tr>";
             }
             echo "</table>";
         }
