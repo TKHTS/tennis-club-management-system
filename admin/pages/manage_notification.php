@@ -43,7 +43,7 @@
   // Update Process
   if (isset($_GET['enId']) && isset($_GET['u'])) {
     //Sanitize text data and add break
-    $postText = nl2br($_POST['content']);
+    $postText = nl2br(htmlspecialchars($_POST['content']));
     //Delete unnecessary linefeed code
     $postText = str_replace(array("\r\n", "\r", "\n"), "", $postText);
     $postId = $_GET['enId'];
