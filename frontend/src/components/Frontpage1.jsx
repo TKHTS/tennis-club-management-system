@@ -10,7 +10,7 @@ function Frontpage1() {
 
   $.ajax({
     type: "GET",
-    url: host+"/tcms/api/get_courses.php",
+    url: host + "/api/get_courses.php",
     success(data) {
       setCourses(data);
     },
