@@ -36,3 +36,19 @@ body {
 video {
   width: 100%;
 }
+
+nav {
+  padding-top: 12px;
+}
+nav ul {
+  display: flex;
+  padding: 24px 0px;
+}
+nav ul li {
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  margin: 12px;
+}

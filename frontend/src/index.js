@@ -1,19 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Frontpage1 from "./components/Frontpage1";
-import FrontPage2 from "./components/FrontPage2";
-import FrontPage3 from "./components/FrontPage3";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import './bootstrap.min.css';
+import RouteLayout from './Route';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
   <div className="bg-light main">
-    <Frontpage1 />
-    <FrontPage2 />
-    <FrontPage3 />
+  <RouteLayout />
   </div>
   </>
 );
